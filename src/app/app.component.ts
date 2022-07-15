@@ -1,5 +1,6 @@
 import { Component, HostListener, VERSION } from '@angular/core';
 import { WebMidi } from 'webmidi';
+import { Chord } from './models/chord';
 
 @Component({
   selector: 'my-app',
@@ -10,76 +11,57 @@ export class AppComponent {
   //outputs!: IterableIterator<WebMidi.MIDIOutput>;
   chord: number[] = [48, 52, 55]; // C major
 
-  currentlyHeld: number[] = [];
-  noteMapping: Map<string, number> = new Map<string, number>([
-    ['KeyZ', 0],
-    ['KeyX', 0],
-    ['KeyC', 0],
-    ['KeyV', 0],
-    ['KeyB', 0],
-    ['KeyN', 0],
-    ['KeyM', 0],
-    ['Comma', 0],
-    ['Period', 0],
-    ['Slash', 0],
-    ['KeyA', 0],
-    ['KeyS', 0],
-    ['KeyD', 0],
-    ['KeyF', 0],
-    ['KeyG', 0],
-    ['KeyH', 0],
-    ['KeyJ', 0],
-    ['KeyK', 0],
-    ['KeyL', 0],
-    ['Semicolon', 0],
-    ['Quote', 0],
-    ['KeyQ', 0],
-    ['KeyW', 0],
-    ['KeyE', 0],
-    ['KeyR', 0],
-    ['KeyT', 0],
-    ['KeyY', 0],
-    ['KeyU', 0],
-    ['KeyI', 0],
-    ['KeyO', 0],
-    ['KeyP', 0],
-    ['BracketLeft', 0],
-    ['BracketRight', 0],
-    ['Digit1', 0],
-    ['Digit2', 0],
-    ['Digit3', 0],
-    ['Digit4', 0],
-    ['Digit5', 0],
-    ['Digit6', 0],
-    ['Digit7', 0],
-    ['Digit8', 0],
-    ['Digit9', 0],
-    ['Digit0', 0],
-    ['Minus', 0],
-    ['Equal', 0],
+  currentlyHeld: string[] = [];
+  noteMapping: Map<string, Chord> = new Map<string, Chord>([
+    ['Digit1', { name: '', notes: [] }],
+    ['Digit2', { name: '', notes: [] }],
+    ['Digit3', { name: '', notes: [] }],
+    ['Digit4', { name: '', notes: [] }],
+    ['Digit5', { name: '', notes: [] }],
+    ['Digit6', { name: '', notes: [] }],
+    ['Digit7', { name: '', notes: [] }],
+    ['Digit8', { name: '', notes: [] }],
+    ['Digit9', { name: '', notes: [] }],
+    ['Digit0', { name: '', notes: [] }],
+    ['Minus', { name: '', notes: [] }],
+    ['Equal', { name: '', notes: [] }],
+    ['KeyQ', { name: 'Eb', notes: [] }], //Eflat
+    ['KeyW', { name: '', notes: [] }], //Bflat
+    ['KeyE', { name: '', notes: [] }], //F
+    ['KeyR', { name: 'C', notes: [43, 48, 52] }], //C
+    ['KeyT', { name: '', notes: [] }], //G
+    ['KeyY', { name: '', notes: [] }],
+    ['KeyU', { name: '', notes: [] }],
+    ['KeyI', { name: '', notes: [] }],
+    ['KeyO', { name: '', notes: [] }],
+    ['KeyP', { name: '', notes: [] }],
+    ['BracketLeft', { name: '', notes: [] }],
+    ['BracketRight', { name: '', notes: [] }],
+    ['KeyA', { name: '', notes: [] }],
+    ['KeyS', { name: '', notes: [] }],
+    ['KeyD', { name: '', notes: [] }],
+    ['KeyF', { name: 'Cm', notes: [43, 48, 51] }], //Cm
+    ['KeyG', { name: '', notes: [] }],
+    ['KeyH', { name: '', notes: [] }],
+    ['KeyJ', { name: '', notes: [] }],
+    ['KeyK', { name: '', notes: [] }],
+    ['KeyL', { name: '', notes: [] }],
+    ['Semicolon', { name: '', notes: [] }],
+    ['Quote', { name: '', notes: [] }],
+    ['KeyZ', { name: '', notes: [] }],
+    ['KeyX', { name: '', notes: [] }],
+    ['KeyC', { name: '', notes: [] }],
+    ['KeyV', { name: '', notes: [] }],
+    ['KeyB', { name: '', notes: [] }],
+    ['KeyN', { name: '', notes: [] }],
+    ['KeyM', { name: '', notes: [] }],
+    ['Comma', { name: '', notes: [] }],
+    ['Period', { name: '', notes: [] }],
+    ['Slash', { name: '', notes: [] }],
   ]);
 
   ngOnInit() {
     // update note mapping
-    let entries = Array.from(this.noteMapping.entries());
-    console.log(entries);
-    let start = 33;
-    for (let i = 0; i < 10; i++) {
-      this.noteMapping.set(entries[i][0], start + i * 2);
-    }
-    start = 38;
-    for (let i = 0; i < 11; i++) {
-      this.noteMapping.set(entries[i + 10][0], start + i * 2);
-    }
-    start = 43;
-    for (let i = 0; i < 12; i++) {
-      this.noteMapping.set(entries[i + 21][0], start + i * 2);
-    }
-    start = 48;
-    for (let i = 0; i < 12; i++) {
-      this.noteMapping.set(entries[i + 33][0], start + i * 2);
-    }
-    console.log(this.noteMapping);
     WebMidi.enable().then(() => {
       if (WebMidi.outputs.length < 1) {
         console.log('No midi output');
@@ -99,10 +81,12 @@ export class AppComponent {
     //console.log(event.code + ' ' + this.noteMapping.get(event.code));
     if (
       this.noteMapping.get(event.code) &&
-      !this.currentlyHeld.includes(this.noteMapping.get(event.code))
+      !this.currentlyHeld.includes(event.code)
     ) {
-      this.currentlyHeld.push(this.noteMapping.get(event.code));
-      WebMidi.outputs[0].channels[1].playNote(this.noteMapping.get(event.code));
+      this.currentlyHeld.push(event.code);
+      WebMidi.outputs[0].channels[1].playNote(
+        this.noteMapping.get(event.code).notes
+      );
     }
   }
 
@@ -110,13 +94,12 @@ export class AppComponent {
   onKeyUp(event: KeyboardEvent) {
     if (
       this.noteMapping.get(event.code) &&
-      this.currentlyHeld.includes(this.noteMapping.get(event.code))
+      this.currentlyHeld.includes(event.code)
     ) {
-      this.currentlyHeld.splice(
-        this.currentlyHeld.indexOf(this.noteMapping.get(event.code)),
-        1
+      this.currentlyHeld.splice(this.currentlyHeld.indexOf(event.code), 1);
+      WebMidi.outputs[0].channels[1].stopNote(
+        this.noteMapping.get(event.code).notes
       );
-      WebMidi.outputs[0].channels[1].stopNote(this.noteMapping.get(event.code));
     }
   }
 }
