@@ -1,0 +1,7 @@
+<mat-grid-list cols="{{ chordRows.length }}" rowHeight="100px">
+  <ng-template ngFor let-chordRow [ngForOf]="chordRows">
+    <mat-grid-tile *ngFor="let chordCell of chordRow">
+      {{ chordCell[0] }}
+    </mat-grid-tile>
+  </ng-template>
+</mat-grid-list>
