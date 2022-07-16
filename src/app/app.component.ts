@@ -12,6 +12,7 @@ export class AppComponent {
   chord: number[] = [48, 52, 55]; // C major
 
   currentlyHeld: string[] = [];
+  alreadyReleased: string[] = [];
   noteMapping: Map<string, Chord> = new Map<string, Chord>([
     ['Digit1', { name: '', notes: [] }],
     ['Digit2', { name: '', notes: [] }],
@@ -25,35 +26,35 @@ export class AppComponent {
     ['Digit0', { name: '', notes: [] }],
     ['Minus', { name: '', notes: [] }],
     ['Equal', { name: '', notes: [] }],
-    ['KeyQ', { name: 'Eb', notes: [] }], //Eflat
-    ['KeyW', { name: '', notes: [] }], //Bflat
-    ['KeyE', { name: '', notes: [] }], //F
-    ['KeyR', { name: 'C', notes: [43, 48, 52] }], //C
-    ['KeyT', { name: 'G', notes: [43, 47, 50] }], //G
-    ['KeyY', { name: '', notes: [] }],
-    ['KeyU', { name: '', notes: [] }],
-    ['KeyI', { name: '', notes: [] }],
-    ['KeyO', { name: '', notes: [] }],
-    ['KeyP', { name: '', notes: [] }],
+    ['KeyQ', { name: 'Eb', notes: [51, 43, 46] }], //Eflat 3 5 1
+    ['KeyW', { name: 'Bb', notes: [46, 50, 53] }], //Bflat 1 3 5
+    ['KeyE', { name: 'F', notes: [53, 45, 48] }], //F 3 5 1
+    ['KeyR', { name: 'C', notes: [48, 52, 43] }], //C 5 1 3
+    ['KeyT', { name: 'G', notes: [43, 47, 50] }], //G 1 3 5
+    ['KeyY', { name: 'D', notes: [50, 42, 45] }], // 3 5 1
+    ['KeyU', { name: 'A', notes: [] }],
+    ['KeyI', { name: 'E', notes: [] }],
+    ['KeyO', { name: 'B', notes: [] }],
+    ['KeyP', { name: 'F#', notes: [] }],
     ['BracketLeft', { name: '', notes: [] }],
     ['BracketRight', { name: '', notes: [] }],
-    ['KeyA', { name: '', notes: [] }],
-    ['KeyS', { name: '', notes: [] }],
-    ['KeyD', { name: '', notes: [] }],
+    ['KeyA', { name: 'Ebm', notes: [51, 42, 46] }],
+    ['KeyS', { name: 'Bbm', notes: [46, 49, 53] }],
+    ['KeyD', { name: 'Fm', notes: [45, 49, 53] }],
     ['KeyF', { name: 'Cm', notes: [43, 48, 51] }], //Cm
     ['KeyG', { name: 'Gm', notes: [43, 46, 50] }],
-    ['KeyH', { name: '', notes: [] }],
-    ['KeyJ', { name: '', notes: [] }],
+    ['KeyH', { name: 'Dm', notes: [50, 41, 45] }],
+    ['KeyJ', { name: 'Am', notes: [] }],
     ['KeyK', { name: '', notes: [] }],
     ['KeyL', { name: '', notes: [] }],
     ['Semicolon', { name: '', notes: [] }],
     ['Quote', { name: '', notes: [] }],
-    ['KeyZ', { name: '', notes: [] }],
-    ['KeyX', { name: '', notes: [] }],
-    ['KeyC', { name: '', notes: [] }],
-    ['KeyV', { name: '', notes: [] }],
+    ['KeyZ', { name: 'Eb7', notes: [51, 43, 49] }], // 1 3 7
+    ['KeyX', { name: 'Bb7', notes: [44, 46, 50] }], // 7 1 3
+    ['KeyC', { name: 'F7', notes: [45, 51, 53] }],
+    ['KeyV', { name: 'C7', notes: [46, 48, 52] }],
     ['KeyB', { name: 'G7', notes: [43, 47, 53] }],
-    ['KeyN', { name: '', notes: [] }],
+    ['KeyN', { name: 'D7', notes: [50, 42, 48] }], // 3 7 1
     ['KeyM', { name: '', notes: [] }],
     ['Comma', { name: '', notes: [] }],
     ['Period', { name: '', notes: [] }],
@@ -73,17 +74,28 @@ export class AppComponent {
   }
 
   stopChord(): void {
-    WebMidi.outputs[0].channels[1].stopNote(this.chord);
+    //WebMidi.outputs[0].channels[1].stopNote(this.chord);
+    for (let chordName of this.alreadyReleased) {
+      WebMidi.outputs[0].channels[1].stopNote(
+        this.noteMapping.get(chordName).notes
+      );
+    }
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     //console.log(event.code + ' ' + this.noteMapping.get(event.code));
     if (
-      this.noteMapping.get(event.code) &&
-      !this.currentlyHeld.includes(event.code)
+      this.noteMapping.get(event.code)
+      //&& !this.currentlyHeld.includes(event.code)
     ) {
-      this.currentlyHeld.push(event.code);
+      for (let chordName of this.alreadyReleased) {
+        WebMidi.outputs[0].channels[1].stopNote(
+          this.noteMapping.get(chordName).notes
+        );
+      }
+      this.alreadyReleased = [];
+      //this.currentlyHeld.push(event.code);
       WebMidi.outputs[0].channels[1].playNote(
         this.noteMapping.get(event.code).notes
       );
@@ -93,13 +105,10 @@ export class AppComponent {
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
     if (
-      this.noteMapping.get(event.code) &&
-      this.currentlyHeld.includes(event.code)
+      this.noteMapping.get(event.code)
+      //&& this.currentlyHeld.includes(event.code)
     ) {
-      this.currentlyHeld.splice(this.currentlyHeld.indexOf(event.code), 1);
-      WebMidi.outputs[0].channels[1].stopNote(
-        this.noteMapping.get(event.code).notes
-      );
+      this.alreadyReleased.push(event.code);
     }
   }
 }
