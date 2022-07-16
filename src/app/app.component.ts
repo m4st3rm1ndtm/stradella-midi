@@ -29,7 +29,7 @@ export class AppComponent {
     ['KeyW', { name: '', notes: [] }], //Bflat
     ['KeyE', { name: '', notes: [] }], //F
     ['KeyR', { name: 'C', notes: [43, 48, 52] }], //C
-    ['KeyT', { name: '', notes: [] }], //G
+    ['KeyT', { name: 'G', notes: [43, 47, 50] }], //G
     ['KeyY', { name: '', notes: [] }],
     ['KeyU', { name: '', notes: [] }],
     ['KeyI', { name: '', notes: [] }],
@@ -41,7 +41,7 @@ export class AppComponent {
     ['KeyS', { name: '', notes: [] }],
     ['KeyD', { name: '', notes: [] }],
     ['KeyF', { name: 'Cm', notes: [43, 48, 51] }], //Cm
-    ['KeyG', { name: '', notes: [] }],
+    ['KeyG', { name: 'Gm', notes: [43, 46, 50] }],
     ['KeyH', { name: '', notes: [] }],
     ['KeyJ', { name: '', notes: [] }],
     ['KeyK', { name: '', notes: [] }],
@@ -52,7 +52,7 @@ export class AppComponent {
     ['KeyX', { name: '', notes: [] }],
     ['KeyC', { name: '', notes: [] }],
     ['KeyV', { name: '', notes: [] }],
-    ['KeyB', { name: '', notes: [] }],
+    ['KeyB', { name: 'G7', notes: [43, 47, 53] }],
     ['KeyN', { name: '', notes: [] }],
     ['KeyM', { name: '', notes: [] }],
     ['Comma', { name: '', notes: [] }],
