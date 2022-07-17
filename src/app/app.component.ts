@@ -26,27 +26,27 @@ export class AppComponent {
     ['Digit0', { name: '', notes: [] }],
     ['Minus', { name: '', notes: [] }],
     ['Equal', { name: '', notes: [] }],
-    ['KeyQ', { name: 'Eb', notes: [51, 43, 46] }], //Eflat 3 5 1
-    ['KeyW', { name: 'Bb', notes: [46, 50, 53] }], //Bflat 1 3 5
-    ['KeyE', { name: 'F', notes: [53, 45, 48] }], //F 3 5 1
-    ['KeyR', { name: 'C', notes: [48, 52, 43] }], //C 5 1 3
-    ['KeyT', { name: 'G', notes: [43, 47, 50] }], //G 1 3 5
+    ['KeyQ', { name: 'Eb', notes: [51, 43, 46] }], //3 5 1
+    ['KeyW', { name: 'Bb', notes: [46, 50, 53] }], //1 3 5
+    ['KeyE', { name: 'F', notes: [53, 45, 48] }], //3 5 1
+    ['KeyR', { name: 'C', notes: [48, 52, 43] }], //5 1 3
+    ['KeyT', { name: 'G', notes: [43, 47, 50] }], //1 3 5
     ['KeyY', { name: 'D', notes: [50, 42, 45] }], // 3 5 1
-    ['KeyU', { name: 'A', notes: [] }],
-    ['KeyI', { name: 'E', notes: [] }],
-    ['KeyO', { name: 'B', notes: [] }],
-    ['KeyP', { name: 'F#', notes: [] }],
+    ['KeyU', { name: 'A', notes: [45, 49, 52] }], // 1 3 5
+    ['KeyI', { name: 'E', notes: [52, 44, 47] }], // 3 5 1
+    ['KeyO', { name: 'B', notes: [47, 51, 42] }], // 3 5 1
+    ['KeyP', { name: '', notes: [] }],
     ['BracketLeft', { name: '', notes: [] }],
     ['BracketRight', { name: '', notes: [] }],
     ['KeyA', { name: 'Ebm', notes: [51, 42, 46] }],
     ['KeyS', { name: 'Bbm', notes: [46, 49, 53] }],
     ['KeyD', { name: 'Fm', notes: [45, 49, 53] }],
-    ['KeyF', { name: 'Cm', notes: [43, 48, 51] }], //Cm
+    ['KeyF', { name: 'Cm', notes: [43, 48, 51] }], //
     ['KeyG', { name: 'Gm', notes: [43, 46, 50] }],
     ['KeyH', { name: 'Dm', notes: [50, 41, 45] }],
-    ['KeyJ', { name: 'Am', notes: [] }],
-    ['KeyK', { name: '', notes: [] }],
-    ['KeyL', { name: '', notes: [] }],
+    ['KeyJ', { name: 'Am', notes: [45, 48, 52] }],
+    ['KeyK', { name: 'Em', notes: [52, 42, 47] }],
+    ['KeyL', { name: 'Bm', notes: [47, 50, 42] }],
     ['Semicolon', { name: '', notes: [] }],
     ['Quote', { name: '', notes: [] }],
     ['KeyZ', { name: 'Eb7', notes: [51, 43, 49] }], // 1 3 7
@@ -55,9 +55,9 @@ export class AppComponent {
     ['KeyV', { name: 'C7', notes: [46, 48, 52] }],
     ['KeyB', { name: 'G7', notes: [43, 47, 53] }],
     ['KeyN', { name: 'D7', notes: [50, 42, 48] }], // 3 7 1
-    ['KeyM', { name: '', notes: [] }],
-    ['Comma', { name: '', notes: [] }],
-    ['Period', { name: '', notes: [] }],
+    ['KeyM', { name: 'A7', notes: [45, 49, 43] }], // 3 7 1
+    ['Comma', { name: 'E7', notes: [52, 44, 50] }], // 3 7 1
+    ['Period', { name: 'B7', notes: [47, 51, 45] }],
     ['Slash', { name: '', notes: [] }],
   ]);
 
@@ -72,33 +72,27 @@ export class AppComponent {
     });
     //.catch(err => alert(err));
   }
-
-  stopChord(): void {
+  stop(): void {
     //WebMidi.outputs[0].channels[1].stopNote(this.chord);
     for (let chordName of this.alreadyReleased) {
       WebMidi.outputs[0].channels[1].stopNote(
         this.noteMapping.get(chordName).notes
       );
     }
+    this.alreadyReleased = [];
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     //console.log(event.code + ' ' + this.noteMapping.get(event.code));
-    if (
+    if (event.code == 'Space') {
+      // stop everything
+      this.stop();
+    } else if (
       this.noteMapping.get(event.code)
       //&& !this.currentlyHeld.includes(event.code)
     ) {
-      for (let chordName of this.alreadyReleased) {
-        WebMidi.outputs[0].channels[1].stopNote(
-          this.noteMapping.get(chordName).notes
-        );
-      }
-      this.alreadyReleased = [];
-      //this.currentlyHeld.push(event.code);
-      WebMidi.outputs[0].channels[1].playNote(
-        this.noteMapping.get(event.code).notes
-      );
+      this.keyDown(event.code);
     }
   }
 
@@ -108,7 +102,27 @@ export class AppComponent {
       this.noteMapping.get(event.code)
       //&& this.currentlyHeld.includes(event.code)
     ) {
-      this.alreadyReleased.push(event.code);
+      this.keyUp(event.code);
     }
+  }
+
+  keyDown(keyName: string) {
+    for (let chordName of this.alreadyReleased) {
+      WebMidi.outputs[0].channels[1].stopNote(
+        this.noteMapping.get(chordName).notes
+      );
+    }
+    this.alreadyReleased = [];
+    //this.currentlyHeld.push(event.code);
+    WebMidi.outputs[0].channels[1].playNote(
+      this.noteMapping.get(keyName).notes
+    );
+  }
+  keyUp(keyName: string) {
+    this.alreadyReleased.push(keyName);
+  }
+
+  getChordName(name: string): string {
+    return this.noteMapping.get(name).name;
   }
 }

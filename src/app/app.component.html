@@ -1,7 +1,7 @@
 <!--
 <p>Available MIDI outputs:</p>
-<ul id="midi-list"></ul-->
-<button (click)="stopChord()">Stop</button>
+<ul id="midi-list"></ul>
+<button (click)="stopChord()">Stop</button-->
 
 <svg
   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -21,11 +21,16 @@
       .fil0 {fill:#E6E6E6}
       .fil1 {fill:#2B2A29;fill-rule:nonzero}
       .heavy { font: bold 200px sans-serif; text-anchor: middle; dominant-baseline: central;}
+      text {
+        pointer-events: none;
+      }
     </style>
   </defs>
   <g id="Layer_x0020_1">
     <g id="_240909448">
       <rect
+        (pointerdown)="keyDown('KeyQ')"
+        (pointerup)="keyUp('KeyQ')"
         rx="49"
         ry="49"
         height="598"
@@ -34,8 +39,10 @@
         x="1005"
         class="fil0"
       />
-      <text x="1304" y="1015" class="heavy">Eb</text>
+      <text x="1304" y="1015" class="heavy">{{ getChordName('KeyQ') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyW')"
+        (pointerup)="keyUp('KeyW')"
         rx="49"
         ry="49"
         height="598"
@@ -44,7 +51,10 @@
         x="1736"
         class="fil0"
       />
+      <text x="2035" y="1015" class="heavy">{{ getChordName('KeyW') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyE')"
+        (pointerup)="keyUp('KeyE')"
         rx="49"
         ry="49"
         height="598"
@@ -53,7 +63,10 @@
         x="2468"
         class="fil0"
       />
+      <text x="2767" y="1015" class="heavy">{{ getChordName('KeyE') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyR')"
+        (pointerup)="keyUp('KeyR')"
         rx="49"
         ry="49"
         height="598"
@@ -62,7 +75,10 @@
         x="3199"
         class="fil0"
       />
+      <text x="3465" y="1015" class="heavy">{{ getChordName('KeyR') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyT')"
+        (pointerup)="keyUp('KeyT')"
         rx="49"
         ry="49"
         height="598"
@@ -71,7 +87,10 @@
         x="3931"
         class="fil0"
       />
+      <text x="4230" y="1015" class="heavy">{{ getChordName('KeyT') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyY')"
+        (pointerup)="keyUp('KeyY')"
         rx="49"
         ry="49"
         height="598"
@@ -80,7 +99,10 @@
         x="4662"
         class="fil0"
       />
+      <text x="4921" y="1015" class="heavy">{{ getChordName('KeyY') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyU')"
+        (pointerup)="keyUp('KeyU')"
         rx="49"
         ry="49"
         height="598"
@@ -89,7 +111,10 @@
         x="5394"
         class="fil0"
       />
+      <text x="5693" y="1015" class="heavy">{{ getChordName('KeyU') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyI')"
+        (pointerup)="keyUp('KeyI')"
         rx="49"
         ry="49"
         height="598"
@@ -98,7 +123,10 @@
         x="6125"
         class="fil0"
       />
+      <text x="6424" y="1015" class="heavy">{{ getChordName('KeyI') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyO')"
+        (pointerup)="keyUp('KeyO')"
         rx="49"
         ry="49"
         height="598"
@@ -107,7 +135,10 @@
         x="6857"
         class="fil0"
       />
+      <text x="7156" y="1015" class="heavy">{{ getChordName('KeyO') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyP')"
+        (pointerup)="keyUp('KeyP')"
         rx="49"
         ry="49"
         height="598"
@@ -116,7 +147,32 @@
         x="7588"
         class="fil0"
       />
+      <text x="7887" y="1015" class="heavy">{{ getChordName('KeyP') }}</text>
       <rect
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="716"
+        x="9052"
+        class="fil0"
+      />
+
+      <rect
+        (pointerdown)="keyDown('KeyQ')"
+        (pointerup)="keyUp('KeyQ')"
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="716"
+        x="8320"
+        class="fil0"
+      />
+
+      <rect
+        (pointerdown)="keyDown('KeyA')"
+        (pointerup)="keyUp('KeyA')"
         rx="49"
         ry="49"
         height="598"
@@ -125,7 +181,10 @@
         x="1222"
         class="fil0"
       />
+      <text x="1521" y="1731" class="heavy">{{ getChordName('KeyA') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyS')"
+        (pointerup)="keyUp('KeyS')"
         rx="49"
         ry="49"
         height="598"
@@ -134,7 +193,10 @@
         x="1954"
         class="fil0"
       />
+      <text x="2253" y="1731" class="heavy">{{ getChordName('KeyS') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyD')"
+        (pointerup)="keyUp('KeyD')"
         rx="49"
         ry="49"
         height="598"
@@ -143,7 +205,10 @@
         x="2685"
         class="fil0"
       />
+      <text x="2984" y="1731" class="heavy">{{ getChordName('KeyD') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyF')"
+        (pointerup)="keyUp('KeyF')"
         rx="49"
         ry="49"
         height="598"
@@ -152,7 +217,10 @@
         x="3417"
         class="fil0"
       />
+      <text x="3716" y="1731" class="heavy">{{ getChordName('KeyF') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyG')"
+        (pointerup)="keyUp('KeyG')"
         rx="49"
         ry="49"
         height="598"
@@ -161,7 +229,10 @@
         x="4148"
         class="fil0"
       />
+      <text x="4447" y="1731" class="heavy">{{ getChordName('KeyG') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyH')"
+        (pointerup)="keyUp('KeyH')"
         rx="49"
         ry="49"
         height="598"
@@ -170,7 +241,10 @@
         x="4880"
         class="fil0"
       />
+      <text x="5179" y="1731" class="heavy">{{ getChordName('KeyH') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyJ')"
+        (pointerup)="keyUp('KeyJ')"
         rx="49"
         ry="49"
         height="598"
@@ -179,7 +253,10 @@
         x="5611"
         class="fil0"
       />
+      <text x="5910" y="1731" class="heavy">{{ getChordName('KeyJ') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyK')"
+        (pointerup)="keyUp('KeyK')"
         rx="49"
         ry="49"
         height="598"
@@ -188,7 +265,10 @@
         x="6343"
         class="fil0"
       />
+      <text x="6642" y="1731" class="heavy">{{ getChordName('KeyK') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyL')"
+        (pointerup)="keyUp('KeyL')"
         rx="49"
         ry="49"
         height="598"
@@ -197,70 +277,12 @@
         x="7074"
         class="fil0"
       />
+      <text x="7373" y="1731" class="heavy">{{ getChordName('KeyL') }}</text>
+
+      <!-- SEMICOLON should go here -->
       <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="1420"
-        class="fil0"
-      />
-      <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="2152"
-        class="fil0"
-      />
-      <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="2883"
-        class="fil0"
-      />
-      <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="3615"
-        class="fil0"
-      />
-      <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="4346"
-        class="fil0"
-      />
-      <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="5078"
-        class="fil0"
-      />
-      <rect
-        rx="49"
-        ry="49"
-        height="598"
-        width="598"
-        y="2154"
-        x="5809"
-        class="fil0"
-      />
-      <rect
+        (pointerdown)="keyDown('Semicolon')"
+        (pointerup)="keyUp('')"
         rx="49"
         ry="49"
         height="598"
@@ -269,6 +291,9 @@
         x="7806"
         class="fil0"
       />
+      <text x="8105" y="1731" class="heavy">
+        {{ getChordName('Semicolon') }}
+      </text>
       <rect
         rx="49"
         ry="49"
@@ -279,24 +304,93 @@
         class="fil0"
       />
       <rect
+        (pointerdown)="keyDown('KeyZ')"
+        (pointerup)="keyUp('KeyZ')"
         rx="49"
         ry="49"
         height="598"
         width="598"
-        y="716"
-        x="8320"
+        y="2154"
+        x="1420"
         class="fil0"
       />
+      <text x="1716" y="2453" class="heavy">{{ getChordName('KeyZ') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyX')"
+        (pointerup)="keyUp('KeyX')"
         rx="49"
         ry="49"
         height="598"
         width="598"
-        y="716"
-        x="9052"
+        y="2154"
+        x="2152"
         class="fil0"
       />
+      <text x="2451" y="2453" class="heavy">{{ getChordName('KeyX') }}</text>
       <rect
+        (pointerdown)="keyDown('KeyC')"
+        (pointerup)="keyUp('KeyC')"
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="2154"
+        x="2883"
+        class="fil0"
+      />
+      <text x="3182" y="2453" class="heavy">{{ getChordName('KeyC') }}</text>
+      <rect
+        (pointerdown)="keyDown('KeyV')"
+        (pointerup)="keyUp('KeyV')"
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="2154"
+        x="3615"
+        class="fil0"
+      />
+      <text x="3914" y="2453" class="heavy">{{ getChordName('KeyV') }}</text>
+      <rect
+        (pointerdown)="keyDown('KeyB')"
+        (pointerup)="keyUp('KeyB')"
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="2154"
+        x="4346"
+        class="fil0"
+      />
+      <text x="4645" y="2453" class="heavy">{{ getChordName('KeyB') }}</text>
+      <rect
+        (pointerdown)="keyDown('KeyN')"
+        (pointerup)="keyUp('KeyN')"
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="2154"
+        x="5078"
+        class="fil0"
+      />
+      <text x="5377" y="2453" class="heavy">{{ getChordName('KeyN') }}</text>
+      <rect
+        (pointerdown)="keyDown('KeyM')"
+        (pointerup)="keyUp('KeyM')"
+        rx="49"
+        ry="49"
+        height="598"
+        width="598"
+        y="2154"
+        x="5809"
+        class="fil0"
+      />
+      <text x="6108" y="2453" class="heavy">{{ getChordName('KeyM') }}</text>
+
+      <rect
+        (pointerdown)="keyDown('Comma')"
+        (pointerup)="keyUp('Comma')"
         rx="49"
         ry="49"
         height="598"
@@ -305,7 +399,10 @@
         x="6541"
         class="fil0"
       />
+      <text x="6840" y="2453" class="heavy">{{ getChordName('Comma') }}</text>
       <rect
+        (pointerdown)="keyDown('Period')"
+        (pointerup)="keyUp('Period')"
         rx="49"
         ry="49"
         height="598"
@@ -314,6 +411,7 @@
         x="7272"
         class="fil0"
       />
+      <text x="7571" y="2453" class="heavy">{{ getChordName('Period') }}</text>
       <rect
         rx="49"
         ry="49"
@@ -377,6 +475,7 @@
         class="fil0"
         d="m2791 2867h4665c27 0 49 22 49 49v499c0 27-22 49-49 49h-4665c-27 0-49-22-49-49v-499c0-27 22-49 49-49z"
       />
+      <text x="5123" y="3166" class="heavy">Stop</text>
       <path
         class="fil0"
         d="m9101 2867h772c27 0 49 22 49 49v499c0 27-22 49-49 49h-772c-27 0-49-22-49-49v-499c0-27 22-49 49-49z"
