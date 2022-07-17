@@ -26,38 +26,38 @@ export class AppComponent {
     ['Digit0', { name: '', notes: [] }],
     ['Minus', { name: '', notes: [] }],
     ['Equal', { name: '', notes: [] }],
-    ['KeyQ', { name: 'Eb', notes: [51, 43, 46] }], //3 5 1
-    ['KeyW', { name: 'Bb', notes: [46, 50, 53] }], //1 3 5
-    ['KeyE', { name: 'F', notes: [53, 45, 48] }], //3 5 1
-    ['KeyR', { name: 'C', notes: [48, 52, 43] }], //5 1 3
-    ['KeyT', { name: 'G', notes: [43, 47, 50] }], //1 3 5
-    ['KeyY', { name: 'D', notes: [50, 42, 45] }], // 3 5 1
-    ['KeyU', { name: 'A', notes: [45, 49, 52] }], // 1 3 5
-    ['KeyI', { name: 'E', notes: [52, 44, 47] }], // 3 5 1
-    ['KeyO', { name: 'B', notes: [47, 51, 42] }], // 3 5 1
+    ['KeyQ', { name: 'Eb', notes: [63, 55, 58] }], //3 5 1
+    ['KeyW', { name: 'Bb', notes: [58, 62, 65] }], //1 3 5
+    ['KeyE', { name: 'F', notes: [65, 57, 60] }], //3 5 1
+    ['KeyR', { name: 'C', notes: [60, 64, 55] }], //5 1 3
+    ['KeyT', { name: 'G', notes: [55, 59, 62] }], //1 3 5
+    ['KeyY', { name: 'D', notes: [62, 54, 57] }], // 3 5 1
+    ['KeyU', { name: 'A', notes: [57, 61, 64] }], // 1 3 5
+    ['KeyI', { name: 'E', notes: [64, 56, 59] }], // 3 5 1
+    ['KeyO', { name: 'B', notes: [59, 63, 54] }], // 3 5 1
     ['KeyP', { name: '', notes: [] }],
     ['BracketLeft', { name: '', notes: [] }],
     ['BracketRight', { name: '', notes: [] }],
-    ['KeyA', { name: 'Ebm', notes: [51, 42, 46] }],
-    ['KeyS', { name: 'Bbm', notes: [46, 49, 53] }],
-    ['KeyD', { name: 'Fm', notes: [45, 49, 53] }],
-    ['KeyF', { name: 'Cm', notes: [43, 48, 51] }], //
-    ['KeyG', { name: 'Gm', notes: [43, 46, 50] }],
-    ['KeyH', { name: 'Dm', notes: [50, 41, 45] }],
-    ['KeyJ', { name: 'Am', notes: [45, 48, 52] }],
-    ['KeyK', { name: 'Em', notes: [52, 42, 47] }],
-    ['KeyL', { name: 'Bm', notes: [47, 50, 42] }],
+    ['KeyA', { name: 'Ebm', notes: [63, 54, 58] }],
+    ['KeyS', { name: 'Bbm', notes: [58, 61, 65] }],
+    ['KeyD', { name: 'Fm', notes: [65, 56, 60] }],
+    ['KeyF', { name: 'Cm', notes: [60, 63, 55] }], //
+    ['KeyG', { name: 'Gm', notes: [55, 58, 62] }],
+    ['KeyH', { name: 'Dm', notes: [62, 53, 57] }], ///////
+    ['KeyJ', { name: 'Am', notes: [57, 60, 64] }], /////////// 1 octave higher
+    ['KeyK', { name: 'Em', notes: [64, 55, 59] }],
+    ['KeyL', { name: 'Bm', notes: [59, 62, 54] }],
     ['Semicolon', { name: '', notes: [] }],
     ['Quote', { name: '', notes: [] }],
-    ['KeyZ', { name: 'Eb7', notes: [51, 43, 49] }], // 1 3 7
-    ['KeyX', { name: 'Bb7', notes: [44, 46, 50] }], // 7 1 3
-    ['KeyC', { name: 'F7', notes: [45, 51, 53] }],
-    ['KeyV', { name: 'C7', notes: [46, 48, 52] }],
-    ['KeyB', { name: 'G7', notes: [43, 47, 53] }],
-    ['KeyN', { name: 'D7', notes: [50, 42, 48] }], // 3 7 1
-    ['KeyM', { name: 'A7', notes: [45, 49, 43] }], // 3 7 1
-    ['Comma', { name: 'E7', notes: [52, 44, 50] }], // 3 7 1
-    ['Period', { name: 'B7', notes: [47, 51, 45] }],
+    ['KeyZ', { name: 'Eb7', notes: [63, 55, 61] }], // 3 7 1
+    ['KeyX', { name: 'Bb7', notes: [58, 62, 56] }], // 7 1 3
+    ['KeyC', { name: 'F7', notes: [65, 57, 63] }], // 3 7 1
+    ['KeyV', { name: 'C7', notes: [60, 64, 58] }], // 7 1 3
+    ['KeyB', { name: 'G7', notes: [55, 59, 65] }], // 1 3 7
+    ['KeyN', { name: 'D7', notes: [62, 54, 60] }], // 3 7 1
+    ['KeyM', { name: 'A7', notes: [57, 61, 55] }], // 3 7 1
+    ['Comma', { name: 'E7', notes: [64, 56, 62] }], // 3 7 1
+    ['Period', { name: 'B7', notes: [59, 63, 57] }],
     ['Slash', { name: '', notes: [] }],
   ]);
 
